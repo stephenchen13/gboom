@@ -35,8 +35,10 @@ command :add do |c|
     end
 
     # grab credentials from env or global gitfile
-    username = ENV['GITHUB_USERNAME'].empty? ? `git config --global --get github.user` : ENV['GITHUB_USERNAME'] 
-    password = ENV['GITHUB_PASSWORD'].empty? ? `git config --global --get github.password` : ENV['GITHUB_PASSWORD'] 
+    env_username = ENV['GITHUB_USERNAME']
+    env_password = ENV['GITHUB_PASSWORD']
+    username = env_username.nil? || env_username.empty? ? `git config --global --get github.user` : env_username 
+    password = env_password.nil? || env_password.empty ? `git config --global --get github.password` : env_password
     
     raise "You probably didn't read the instructions did you? You can't just skip to the good stuff, setup your github credentials. Noob." if username.empty? || password.empty?
     github = Github.new basic_auth: "#{username.strip}:#{password.strip}"
