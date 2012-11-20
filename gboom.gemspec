@@ -9,9 +9,9 @@ spec = Gem::Specification.new do |s|
   s.summary = 'A description of your project'
 # Add your other files here if you make them
   s.files = %w(
-bin/gist
-lib/gist/version.rb
-lib/gist.rb
+bin/gboom
+lib/gboom/version.rb
+lib/gboom.rb
   )
   s.require_paths << 'lib'
   s.has_rdoc = true
