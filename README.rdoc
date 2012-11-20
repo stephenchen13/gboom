@@ -1,6 +1,6 @@
 = gboom
 Boom! You have a Gist.
-Create Gists from your command line. That's pretty much it. It's pretty fucking cool.
+Create Gists from your command line.
 
 Check out the original boom, it's awesome: https://github.com/holman/boom.
 == Setup
