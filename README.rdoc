@@ -26,5 +26,10 @@ This is how you *gboom* with a description
 This is how you *gboom* privately
     gboom add recipes.txt -p
 
+This is how you *gboom* lines 15 to 30
+    gboom add recipes.txt 15 30
+
+This is how you *gboom* all lines after line 15
+    gboom add recipes.txt 15
 :include:gboom.rdoc
 
