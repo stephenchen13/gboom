@@ -1,0 +1,39 @@
+= gboom
+
+Create Gists from your command line. That's pretty much it. It's pretty fucking cool.
+
+Setup:
+
+1. gem install gboom
+2. configure github credentials
+  set these ENV variables
+  ```
+  export ENV['GITHUB_USERNAME']="username"
+  export ENV['GITHUB_PASSWORD']="password"
+  ```
+
+  or setup your global gitconfig (~/.gitconfig)
+  ```
+  git config --global github.username "username"
+  git config --global github.password "password"
+  ```
+
+Usage:
+
+This is how you 'gboom'
+```
+gboom add recipes.txt
+```
+
+This is how you 'gboom' with a description
+```
+gboom add recipes.txt -d "whatthefuckshouldimakefordinner.com recipes"
+```
+
+This is how you 'gboom' privately
+```
+gboom add recipes.txt -p
+```
+
+:include:gboom.rdoc
+

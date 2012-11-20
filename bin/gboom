@@ -1,0 +1,92 @@
+#!/usr/bin/env ruby
+require 'gli'
+require 'github_api'
+require 'clipboard'
+# begin # XXX: Remove this begin/rescue before distributing your app
+# require 'gist'
+# rescue LoadError
+#   STDERR.puts "In development, you need to use `bundle exec bin/todo` to run your app"
+#   STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
+#   STDERR.puts "Feel free to remove this message from bin/gist now"
+#   exit 64
+# end
+
+include GLI::App
+
+program_desc 'Create Gists from your command line like a pimp.'
+
+version GBoom::VERSION
+
+desc "Create a Gist from an existing file. You just gboom'ed!"
+arg_name '[path to file]'
+command :add do |c|
+  c.desc 'Use this flag to hide your embarassing code. Refactor that shit.'
+  c.arg_name 'public'
+  c.default_value true
+  c.switch [:p, :public]
+
+  c.desc 'What the fuck is happening in this gist?'
+  c.arg_name 'description'
+  c.default_value ''
+  c.flag :d
+
+  c.action do |global_options,options,args|
+    file = args[0]
+    raise "You need to specify a file. C'mon man." unless file
+
+    begin
+      content = File.open(file, 'r') {|f| f.read}
+      file_name = File.basename(file)
+    rescue
+      raise "Unable to read file. Dude, you're fucking this up."
+    end
+
+    # grab credentials from env or global gitfile
+    username = ENV['GITHUB_USERNAME'].empty? ? `git config --global --get github.user` : ENV['GITHUB_USERNAME'] 
+    password = ENV['GITHUB_PASSWORD'].empty? ? `git config --global --get github.password` : ENV['GITHUB_PASSWORD'] 
+    
+    raise "You probably didn't read the instructions did you? You can't just skip to the good stuff, setup your github credentials. Noob." if username.empty? || password.empty?
+    github = Github.new basic_auth: "#{username.strip}:#{password.strip}"
+    github.oauth.create 'scopes' => ['gist']
+
+    begin
+      resp = github.gists.create(
+        'description' => options[:d],
+        'public' => options[:p],
+        'files' => {
+          file_name => {
+            'content' => content 
+          }
+        }
+      )
+    rescue Github::Error::GithubError => e
+      raise e.message
+    end
+
+    Clipboard.copy("https://gist.github.com/#{resp[:id]}")
+    puts "GBoom! Copied https://gist.github.com/#{resp[:id]} to your clipboard!"
+  end
+end
+
+pre do |global,command,options,args|
+  # Pre logic here
+  # Return true to proceed; false to abourt and not call the
+  # chosen command
+  # Use skips_pre before a command to skip this block
+  # on that command only
+  true
+end
+
+post do |global,command,options,args|
+  # Post logic here
+  # Use skips_post before a command to skip this
+  # block on that command only
+end
+
+on_error do |exception|
+  # Error logic here
+  # return false to skip default error handling
+  true
+end
+
+exit run(ARGV)

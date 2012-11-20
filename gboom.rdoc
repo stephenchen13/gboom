@@ -1,0 +1,43 @@
+== gboom - Create Gists from your command line like a pimp.
+
+v0.0.1
+
+=== Global Options
+=== --help
+Show this message
+
+
+
+=== --version
+
+
+
+
+=== Commands
+==== Command: <tt>add  [path to file]</tt>
+Create a Gist from an existing file. You just gboom'ed!
+
+
+===== Options
+===== -d description
+
+What the fuck is happening in this gist?
+
+[Default Value] 
+
+
+===== -p|--[no-]public
+Use this flag to hide your embarassing code. Refactor that shit.
+
+
+
+==== Command: <tt>help  command</tt>
+Shows a list of commands or help for one command
+
+Gets help for the application or its commands. Can also list the commands in a way helpful to creating a bash-style completion function
+===== Options
+===== -c
+List commands one per line, to assist with shell completion
+
+
+
