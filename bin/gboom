@@ -11,7 +11,7 @@ program_desc 'Create Gists from your command line like a pimp.'
 version GBoom::VERSION
 
 desc "Create a Gist from an existing file. You just gboom'ed!"
-arg_name '[path to file]'
+arg_name '[path to file] [start_line] [end_line]'
 command :add do |c|
   c.desc 'Use this flag to hide your embarassing code. Refactor that shit.'
   c.arg_name 'public'
@@ -23,12 +23,26 @@ command :add do |c|
   c.default_value ''
   c.flag :d
 
-  c.action do |global_options,options,args|
-    file = args[0]
-    raise "You need to specify a file. C'mon man." unless file
+  c.desc ''
+  c.arg_name 'lines'
+  c.default_value ''
+  c.flag [:l, :lines]
 
+  c.action do |global_options,options,args|
     begin
+      file = args[0]
+      start_line = args[1].to_i
+      end_line = args[2].to_i
+
       content = File.open(file, 'r') {|f| f.read}
+      start_line = start_line == 0 ? 1 : start_line
+      end_line = end_line > 0 ? end_line : content.lines.count
+
+      raise "Is your shit backwards?" if start_line > end_line
+      raise "Start at 1 buddy." if start_line == 0 && end_line > 0
+      raise "You need to specify a file. C'mon man." unless file
+      content = content.lines.to_a.slice(start_line-1, end_line-start_line+1).join
+
       file_name = File.basename(file)
     rescue
       raise "Unable to read file. Dude, you're fucking this up."
@@ -38,7 +52,7 @@ command :add do |c|
     env_username = ENV['GITHUB_USERNAME']
     env_password = ENV['GITHUB_PASSWORD']
     username = env_username.nil? || env_username.empty? ? `git config --global --get github.user` : env_username 
-    password = env_password.nil? || env_password.empty ? `git config --global --get github.password` : env_password
+    password = env_password.nil? || env_password.empty? ? `git config --global --get github.password` : env_password
     
     raise "You probably didn't read the instructions did you? You can't just skip to the good stuff, setup your github credentials. Noob." if username.empty? || password.empty?
     github = Github.new basic_auth: "#{username.strip}:#{password.strip}"

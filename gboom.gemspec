@@ -6,7 +6,8 @@ spec = Gem::Specification.new do |s|
   s.author = 'Stephen Chen'
   s.email = 'stephenchen13@gmail.com'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'A description of your project'
+  s.summary = 'gboom lets you create gists from the command line'
+  s.description = 'the fun way to create gists from your command line'
 # Add your other files here if you make them
   s.files = %w(
 bin/gboom
