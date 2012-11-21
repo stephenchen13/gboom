@@ -5,6 +5,7 @@ spec = Gem::Specification.new do |s|
   s.version = GBoom::VERSION
   s.author = 'Stephen Chen'
   s.email = 'stephenchen13@gmail.com'
+  s.homepage = 'https://github.com/stephenchen13/gboom'
   s.platform = Gem::Platform::RUBY
   s.summary = 'gboom lets you create gists from the command line'
   s.description = 'the fun way to create gists from your command line'
