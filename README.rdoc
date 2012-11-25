@@ -13,7 +13,7 @@ configure github credentials:
   
 
 * or setup your global gitconfig (~/.gitconfig)
-    git config --global github.username "username"
+    git config --global github.user "username"
     git config --global github.password "password"
 
 == Usage
