@@ -23,7 +23,7 @@ This is how you *gboom*
 This is how you *gboom* with a description
     gboom add recipes.txt -d "whatthefuckshouldimakefordinner.com recipes"
 
-This is how you *gboom* privately
+This is how you *gboom* publicly (default: private)
     gboom add recipes.txt -p
 
 This is how you *gboom* lines 15 to 30

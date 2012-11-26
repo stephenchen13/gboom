@@ -15,7 +15,7 @@ Show this message
 
 === Commands
 ==== Command: <tt>add  [path to file]</tt>
-Create a Gist from an existing file. You just gboom'ed!
+Create a Private Gist from an existing file. You just gboom'ed!
 
 
 ===== Options
@@ -26,8 +26,8 @@ What the fuck is happening in this gist?
 [Default Value] 
 
 
-===== -p|--[no-]public
-Use this flag to hide your embarassing code. Refactor that shit.
+===== -p
+Use this flag to do a public gist. Once public a gist can't be converted to private
 
 
 
