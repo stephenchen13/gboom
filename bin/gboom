@@ -53,8 +53,14 @@ command :add do |c|
     env_password = ENV['GITHUB_PASSWORD']
     username = env_username.nil? || env_username.empty? ? `git config --global --get github.user` : env_username 
     password = env_password.nil? || env_password.empty? ? `git config --global --get github.password` : env_password
-    
+
     raise "You probably didn't read the instructions did you? You can't just skip to the good stuff, setup your github credentials. Noob." if username.empty? || password.empty?
+
+    if password[0].chr == '!'
+      command = password[1, password.length]
+      password = `#{command}`
+    end
+
     github = Github.new :basic_auth => "#{username.strip}:#{password.strip}"
     github.oauth.create 'scopes' => ['gist']
 
