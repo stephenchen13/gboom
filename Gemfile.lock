@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gboom (0.0.4)
+    gboom (0.0.6)
       clipboard (= 1.0.1)
       github_api (= 0.8.1)
       gli (= 2.4.1)

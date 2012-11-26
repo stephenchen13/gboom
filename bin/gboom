@@ -15,7 +15,7 @@ arg_name '[path to file] [start_line] [end_line]'
 command :add do |c|
   c.desc 'Use this flag to hide your embarassing code. Refactor that shit.'
   c.arg_name 'public'
-  c.default_value true
+  c.default_value false
   c.switch [:p, :public]
 
   c.desc 'What the fuck is happening in this gist?'
