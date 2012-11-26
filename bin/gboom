@@ -55,7 +55,7 @@ command :add do |c|
     password = env_password.nil? || env_password.empty? ? `git config --global --get github.password` : env_password
     
     raise "You probably didn't read the instructions did you? You can't just skip to the good stuff, setup your github credentials. Noob." if username.empty? || password.empty?
-    github = Github.new basic_auth: "#{username.strip}:#{password.strip}"
+    github = Github.new :basic_auth => "#{username.strip}:#{password.strip}"
     github.oauth.create 'scopes' => ['gist']
 
     begin
