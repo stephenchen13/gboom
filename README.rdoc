@@ -16,6 +16,11 @@ configure github credentials:
     git config --global github.user "username"
     git config --global github.password "password"
 
+  you may set github.password to a command to run to get the password if it
+  begins with a bang ('!'):
+
+    git config --global github.password "!security find-generic-password -gs github.password -w"
+
 == Usage
 This is how you *gboom*
     gboom add recipes.txt
