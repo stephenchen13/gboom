@@ -4,3 +4,6 @@ When /^I get help for "([^"]*)"$/ do |app_name|
 end
 
 # Add more step definitions here
+When /^I add the file "(.*?)" with "(.*?)"$/ do |arg1, arg2|
+  step %(I run `#{arg2} #{arg1}`)
+end
