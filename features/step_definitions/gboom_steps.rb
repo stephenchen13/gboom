@@ -7,3 +7,7 @@ end
 When /^I add the file "(.*?)" with "(.*?)"$/ do |arg1, arg2|
   step %(I run `#{arg2} #{arg1}`)
 end
+
+When /^I create a gist from stdin with "(.*?)"$/ do |arg1|
+  step %(I run `echo "test content" | #{arg1}`)
+end

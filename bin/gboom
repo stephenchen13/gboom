@@ -34,11 +34,11 @@ command :add do |c|
       start_line = args[1].to_i
       end_line = args[2].to_i
 
-      if file && file != '-'
+      if file && !file.empty?
         content = File.open(file, 'r') {|f| f.read}
         file_name = File.basename(file)
       else
-        content = $stdin.read
+        content = ARGF.read
         file_name = 'stdin'
       end
 
@@ -48,8 +48,8 @@ command :add do |c|
       raise "Is your shit backwards?" if start_line > end_line
       raise "Start at 1 buddy." if start_line == 0 && end_line > 0
       content = content.lines.to_a.slice(start_line-1, end_line-start_line+1).join
-    rescue
-      raise "Unable to read file. Dude, you're fucking this up."
+    rescue Exception => e
+      raise "#{e}. Unable to read file. Dude, you're fucking this up."
     end
 
     # grab credentials from env or global gitfile

@@ -39,3 +39,10 @@ Feature: My bootstrapped app kinda works
     """
     GBoom!
     """
+
+    When I create a gist from stdin with "gboom add"
+    Then the exit status should be 0
+    And the output should match:
+    """
+    GBoom!
+    """

@@ -36,5 +36,8 @@ This is how you *gboom* lines 15 to 30
 
 This is how you *gboom* all lines after line 15
     gboom add recipes.txt 15
+
+This is how you *gboom* from stdin
+    echo "important stuff" | gboom add
 :include:gboom.rdoc
 
